@@ -43,30 +43,47 @@ def turns(new_letter, guesses, turns_left, secret_word):
     return turns_left, guesses,display
 
 def display_board(turns_left, secret_word, guesses, result):
+    '''Display currently gussed word, previous guesses
+     and current status of the game'''
     # print(guesses)  
     result_for_display = f"""guess: {" ".join(guesses)}
         {mask_word(secret_word, guesses)}
         turns_left: {turns_left}""" 
     
     if result ==START_GAME:
-        return "enter the guess"
+        return "Enter the guess"
     if result == CORRECT_LETTER:
         return "You entered correct letter\n" + result_for_display
     if result == ALREADY_GUESSED_LETTER:
-        result_for_display += "you already guessed that letter\n"
+        result_for_display += "You already guessed that letter\n"
         return result_for_display
     if result==WRONG_LETTER:
-        result_for_display = "You entered a wrong letter"
+        result_for_display = "You entered a wrong letter\n"
         return result_for_display
        
     if result == GAME_WON:
-        return f"""YOU_WON!!!
-        The word is {secret_word}"""
+        return f"""
+        
+
+
+                                    _______YOU_WON!!!_______
+                                    The word is {secret_word}
+
+
+                        
+        
+        """
     else:
-        return f"""YOU LOST!!!
-        The word is {secret_word}"""
+        return f"""
+
+
+
+                                    ________YOU LOST!!!_______
+                                    The word is {secret_word}
+        """
 
 def hangman():
+    '''main function for hangman game'''
     turns_left = 7 
     secret_word = get_random_word()
     guesses = []
@@ -74,7 +91,7 @@ def hangman():
     result= START_GAME
     while 1:
         print(display_board(turns_left=turns_left, secret_word=secret_word, guesses=guesses, result=result))
-        new_letter = input("guess a letter:")
+        new_letter = input(">>> guess a letter:")
         turns_left, guesses, result = turns(new_letter, guesses, turns_left, secret_word)
 
         if result == GAME_WON:
