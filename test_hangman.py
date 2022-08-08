@@ -67,40 +67,40 @@ def test_mask_word_with_no_single_gusses():
 
 
 
-def test_good_geuss_input():
+def test_good_guess_input():
     secret_word = "elephant"
-    guesses = list('ephan')
+    guesses = list('ephqan')
     turns_left = 5
     new_letter = "l"
-    assert hangman.turns(new_letter,secret_word,guesses,turns_left)==(turns_left ,guesses+['l', ], hangman.CORRECT_LETTER)
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word)==(turns_left ,guesses+['l', ], hangman.CORRECT_LETTER)
 
 def test_game_lost():
     secret_word = "banana"
-    guesses = list('cblknr')
+    guesses = list('vewopq')
     turns_left = 1
-    new_letter = "l"
-    assert hangman.turns(new_letter, secret_word, guesses, turns_left) == (turns_left, guesses, hangman.GAME_LOST)   
+    new_letter = "p"
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.GAME_LOST)   
 
 def test_game_won():
-    secret_word = "banana"
-    guesses = list('bnx')
+    secret_word = "acid"
+    guesses = list('aci')
+    turns_left = 7
+    new_letter = "d"
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.GAME_WON)
+
+def test_bad_guess_input():
+    secret_word = "car"
+    guesses = list('rax')
     turns_left = 6
     new_letter = "a"
-    assert hangman.turns(new_letter, secret_word, guesses, turns_left) == (turns_left, guesses, hangman.GAME_WON)
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.WRONG_LETTER)
 
-def bad_guess_input():
+def test_already_guessed_letter():
     secret_word = "car"
     guesses = list('rax')
-    turns_left = 4
-    new_letter = "q"
-    assert hangman.turns(new_letter, secret_word, guesses, turns_left) == (turns_left - 1, guesses + ['q', ], hangman.WRONG_LETTER)
-
-def already_guessed_letter():
-    secret_word = "car"
-    guesses = list('rax')
-    turns_left = 4
+    turns_left = 6
     new_letter = "r"
-    assert hangman.turns(new_letter, secret_word, guesses, turns_left) == (turns_left, guesses, hangman.ALREADY_GUESSED_LETTER)
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.ALREADY_GUESSED_LETTER)
 
 
 
