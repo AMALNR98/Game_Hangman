@@ -1,5 +1,3 @@
-from multiprocessing.context import assert_spawning
-from re import L
 import hangman
 import random
 random.seed(10)
@@ -62,7 +60,7 @@ def test_mask_word_single_guesses():
 def test_mask_word_multiple_guesses():
     assert hangman.mask_word('cannon',['n']) == '--nn-n'
 
-def test_mask_word_with_no_single_gusses():
+def test_mask_word_with_no_single_gusses():                                                                                  
     assert hangman.mask_word('police',['z'])=='------'
 
 
@@ -77,7 +75,7 @@ def test_good_guess_input():
 def test_game_lost():
     secret_word = "banana"
     guesses = list('vewopq')
-    turns_left = 1
+    turns_left = 0
     new_letter = "p"
     assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.GAME_LOST)   
 
@@ -90,10 +88,10 @@ def test_game_won():
 
 def test_bad_guess_input():
     secret_word = "car"
-    guesses = list('rax')
-    turns_left = 6
-    new_letter = "a"
-    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.WRONG_LETTER)
+    guesses = list('ra')
+    turns_left = 7
+    new_letter = "y"
+    assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left-1, guesses +[new_letter], hangman.WRONG_LETTER)
 
 def test_already_guessed_letter():
     secret_word = "car"
@@ -103,4 +101,20 @@ def test_already_guessed_letter():
     assert hangman.turns(new_letter, guesses, turns_left, secret_word) == (turns_left, guesses, hangman.ALREADY_GUESSED_LETTER)
 
 
+def test_display_board_when_won():
+    secret_word = 'amazon'
+    guesses = None
+    turns_left = None
+    result = hangman.GAME_WON    
+    result_for_display =  """
+        
 
+
+                                    _______YOU_WON!!!_______
+                                    The word is amazon
+
+
+                        
+        
+        """
+    assert hangman.display_board(secret_word, guesses, turns_left, result)== result_for_display
