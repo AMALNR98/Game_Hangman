@@ -45,7 +45,7 @@ def turns(new_letter, guesses, turns_left, secret_word):
 def display_board(turns_left, secret_word, guesses, result):
     '''Display currently gussed word, previous guesses
      and current status of the game'''
-    print(guesses,"1")  
+    print(guesses)  
     result_for_display = f"""guess: {" ".join(guesses)}
         {mask_word(secret_word, guesses)}
         turns_left: {turns_left}""" 
@@ -55,7 +55,7 @@ def display_board(turns_left, secret_word, guesses, result):
     if result == CORRECT_LETTER:
         return "You entered correct letter\n" + result_for_display
     if result == ALREADY_GUESSED_LETTER:
-        result_for_display += "\nYou already guessed that letter\n"
+        result_for_display = "You already guessed that letter\n"
         return result_for_display
     if result==WRONG_LETTER:
         result_for_display = "You entered a wrong letter\n"
@@ -93,7 +93,7 @@ def main():
     guesses = []
     print(secret_word)
     result= START_GAME
-    while 1:
+    while True:
         print(display_board(turns_left=turns_left, secret_word=secret_word, guesses=guesses, result=result))
         new_letter = input(">>> guess a letter:")
         turns_left, guesses, result = turns(new_letter, guesses, turns_left, secret_word)

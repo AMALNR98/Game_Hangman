@@ -144,3 +144,11 @@ def test_display_board_when_worng_letter():
     result = hangman.WRONG_LETTER
     result_for_display = "You entered a wrong letter\n"
     assert hangman.display_board(turns_left, secret_word, guesses, result)== result_for_display
+
+def test_display_board_when_already_gussed_word():
+    secret_word = 'amazon'
+    guesses = ['aqwe']
+    turns_left = 1
+    result = hangman.ALREADY_GUESSED_LETTER
+    result_for_display = "You already guessed that letter\n"
+    assert hangman.display_board(turns_left, secret_word, guesses, result)== result_for_display
