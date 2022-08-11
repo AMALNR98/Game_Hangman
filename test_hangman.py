@@ -118,3 +118,27 @@ def test_display_board_when_won():
         
         """
     assert hangman.display_board(turns_left, secret_word, guesses, result)== result_for_display
+
+
+def test_display_board_when_lost():
+    secret_word = 'amazon'
+    guesses = ['aqwert']
+    turns_left = 0
+    result = hangman.GAME_LOST
+    result_for_display = """
+
+
+
+                                    ________YOU LOST!!!_______
+                                    The word is amazon
+        
+        
+        
+        """
+    assert hangman.display_board(turns_left, secret_word, guesses, result)== result_for_display
+
+    def test_display_board_when_worng_letter():
+        secret_word = 'amazon'
+        guesses = ['aqwert']
+        turns_left = 0
+        result = hangman.GAME_LOST
