@@ -103,8 +103,8 @@ def test_already_guessed_letter():
 
 def test_display_board_when_won():
     secret_word = 'amazon'
-    guesses = None
-    turns_left = None
+    guesses = ['amzo']
+    turns_left = 7
     result = hangman.GAME_WON    
     result_for_display =  """
         
@@ -117,4 +117,4 @@ def test_display_board_when_won():
                         
         
         """
-    assert hangman.display_board(secret_word, guesses, turns_left, result)== result_for_display
+    assert hangman.display_board(turns_left, secret_word, guesses, result)== result_for_display
